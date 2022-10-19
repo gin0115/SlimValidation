@@ -6,7 +6,9 @@
 [![Total Downloads](https://poser.pugx.org/gin0115/slim-validation/downloads)](https://packagist.org/packages/gin0115/slim-validation)
 [![License](https://poser.pugx.org/gin0115/slim-validation/license)](https://packagist.org/packages/gin0115/slim-validation)
 
-A validator for PHP, using [Respect Validation](https://github.com/Respect/Validation) (**Requires PHP 7+**)
+## Forked copy of awurth/SlimValidation with support for Respect/Validation 2.1
+
+A validator for PHP, using [Respect Validation V2.1](https://github.com/Respect/Validation) (**Requires PHP 7+**)
 
 > This project was originally designed to be used with the Micro-Framework "Slim", but can now
   be used with any [psr/http-message](https://github.com/php-fig/http-message)
