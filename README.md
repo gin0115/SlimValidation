@@ -2,9 +2,9 @@
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/gin0115/SlimValidation/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/gin0115/SlimValidation/?branch=master)
 [![Build Status](https://travis-ci.org/awurth/SlimValidation.svg?branch=master)](https://travis-ci.org/awurth/SlimValidation)
-[![Latest Unstable Version](http://poser.pugx.org/phpunit/phpunit/v/unstable)](https://packagist.org/packages/gin0115/SlimValidation)
-[![Total Downloads](https://poser.pugx.org/awurth/slim-validation/downloads)](https://packagist.org/packages/awurth/slim-validation)
-[![License](https://poser.pugx.org/awurth/slim-validation/license)](https://packagist.org/packages/awurth/slim-validation)
+[![Latest Unstable Version](https://poser.pugx.org/gin0115/slim-validation/v/unstable)](https://packagist.org/packages/gin0115/slim-validation)
+[![Total Downloads](https://poser.pugx.org/gin0115/slim-validation/downloads)](https://packagist.org/packages/gin0115/slim-validation)
+[![License](https://poser.pugx.org/gin0115/slim-validation/license)](https://packagist.org/packages/gin0115/slim-validation)
 
 A validator for PHP, using [Respect Validation](https://github.com/Respect/Validation) (**Requires PHP 7+**)
 
