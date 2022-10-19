@@ -11,16 +11,16 @@
 
 namespace Awurth\SlimValidation;
 
-use InvalidArgumentException;
-use Psr\Http\Message\ServerRequestInterface as Request;
 use ReflectionClass;
-use ReflectionException;
 use ReflectionProperty;
-use Respect\Validation\Exceptions\NestedValidationException;
-use Respect\Validation\Rules\AbstractComposite;
-use Respect\Validation\Rules\AbstractWrapper;
+use ReflectionException;
+use InvalidArgumentException;
 use Respect\Validation\Validatable;
 use Slim\Interfaces\RouteInterface;
+use Respect\Validation\Rules\AbstractWrapper;
+use Respect\Validation\Rules\AbstractComposite;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Respect\Validation\Exceptions\NestedValidationException;
 
 /**
  * Validator.
@@ -29,6 +29,7 @@ use Slim\Interfaces\RouteInterface;
  */
 class Validator implements ValidatorInterface
 {
+
     /**
      * The default error messages for the given rules.
      *
@@ -64,12 +65,12 @@ class Validator implements ValidatorInterface
      * @param bool     $showValidationRules
      * @param string[] $defaultMessages
      */
-    public function __construct(bool $showValidationRules = true, array $defaultMessages = [])
+    public function __construct(bool $showValidationRules = true, array $defaultMessages = array())
     {
         $this->showValidationRules = $showValidationRules;
-        $this->defaultMessages = $defaultMessages;
-        $this->errors = [];
-        $this->values = [];
+        $this->defaultMessages     = $defaultMessages;
+        $this->errors              = array();
+        $this->values              = array();
     }
 
     /**
@@ -91,7 +92,7 @@ class Validator implements ValidatorInterface
      *
      * @return self
      */
-    public function array(array $array, array $rules, ?string $group = null, array $messages = [], $default = null): self
+    public function array(array $array, array $rules, ?string $group = null, array $messages = array(), $default = null): self
     {
         foreach ($rules as $key => $options) {
             $this->validateInput(
@@ -115,7 +116,7 @@ class Validator implements ValidatorInterface
      *
      * @return self
      */
-    public function object($object, array $rules, ?string $group = null, array $messages = [], $default = null): self
+    public function object($object, array $rules, ?string $group = null, array $messages = array(), $default = null): self
     {
         if (!is_object($object)) {
             throw new InvalidArgumentException('The first argument should be an object');
@@ -143,7 +144,7 @@ class Validator implements ValidatorInterface
      *
      * @return self
      */
-    public function request(Request $request, array $rules, ?string $group = null, array $messages = [], $default = null): self
+    public function request(Request $request, array $rules, ?string $group = null, array $messages = array(), $default = null): self
     {
         foreach ($rules as $param => $options) {
             $this->validateInput(
@@ -159,7 +160,7 @@ class Validator implements ValidatorInterface
     /**
      * {@inheritdoc}
      */
-    public function validate($input, array $rules, ?string $group = null, array $messages = [], $default = null): self
+    public function validate($input, array $rules, ?string $group = null, array $messages = array(), $default = null): self
     {
         if ($input instanceof Request) {
             return $this->request($input, $rules, $group, $messages, $default);
@@ -187,7 +188,7 @@ class Validator implements ValidatorInterface
      *
      * @return self
      */
-    public function value($value, $rules, string $key, ?string $group = null, array $messages = []): self
+    public function value($value, $rules, string $key, ?string $group = null, array $messages = array()): self
     {
         return $this->validateInput($value, new Configuration($rules, $key, $group), $messages);
     }
@@ -254,10 +255,10 @@ class Validator implements ValidatorInterface
         }
 
         if (!empty($group)) {
-            return (string)($this->errors[$group][$key][$index] ?? '');
+            return (string) ($this->errors[$group][$key][$index] ?? '');
         }
 
-        return (string)($this->errors[$key][$index] ?? '');
+        return (string) ($this->errors[$key][$index] ?? '');
     }
 
     /**
@@ -267,10 +268,10 @@ class Validator implements ValidatorInterface
     {
         if (!empty($key)) {
             if (!empty($group)) {
-                return $this->errors[$group][$key] ?? [];
+                return $this->errors[$group][$key] ?? array();
             }
 
-            return $this->errors[$key] ?? [];
+            return $this->errors[$key] ?? array();
         }
 
         return $this->errors;
@@ -289,13 +290,13 @@ class Validator implements ValidatorInterface
         if ($group && isset($this->errors[$group][$key])) {
             $first = array_slice($this->errors[$group][$key], 0, 1);
 
-            return (string)array_shift($first);
+            return (string) array_shift($first);
         }
 
         if (isset($this->errors[$key])) {
             $first = array_slice($this->errors[$key], 0, 1);
 
-            return (string)array_shift($first);
+            return (string) array_shift($first);
         }
 
         return '';
@@ -319,7 +320,7 @@ class Validator implements ValidatorInterface
     public function getValues(?string $group = null): array
     {
         if (!empty($group)) {
-            return $this->values[$group] ?? [];
+            return $this->values[$group] ?? array();
         }
 
         return $this->values;
@@ -505,10 +506,10 @@ class Validator implements ValidatorInterface
     protected function getRequestParam(Request $request, $key, $default = null)
     {
         $postParams = $request->getParsedBody();
-        $getParams = $request->getQueryParams();
-        $route = $request->getAttribute('route');
+        $getParams  = $request->getQueryParams();
+        $route      = $request->getAttribute('route');
 
-        $routeParams = [];
+        $routeParams = array();
         if ($route instanceof RouteInterface) {
             $routeParams = $route->getArguments();
         }
@@ -539,7 +540,7 @@ class Validator implements ValidatorInterface
     protected function getRulesNames(Validatable $validatable): array
     {
         if ($validatable instanceof AbstractComposite) {
-            $rulesNames = [];
+            $rulesNames = array();
             foreach ($validatable->getRules() as $rule) {
                 array_push($rulesNames, ...$this->getRulesNames($rule instanceof AbstractWrapper ? $rule->getValidatable() : $rule));
             }
@@ -547,7 +548,7 @@ class Validator implements ValidatorInterface
             return $rulesNames;
         }
 
-        return [lcfirst((new ReflectionClass($validatable))->getShortName())];
+        return array(lcfirst((new ReflectionClass($validatable))->getShortName()));
     }
 
     /**
@@ -557,10 +558,10 @@ class Validator implements ValidatorInterface
      * @param Configuration             $config
      * @param string[]                  $messages
      */
-    protected function handleValidationException(NestedValidationException $e, Configuration $config, array $messages = [])
+    protected function handleValidationException(NestedValidationException $e, Configuration $config, array $messages = array())
     {
         if ($config->hasMessage()) {
-            $this->setErrors([$config->getMessage()], $config->getKey(), $config->getGroup());
+            $this->setErrors(array($config->getMessage()), $config->getKey(), $config->getGroup());
         } else {
             $this->storeErrors($e, $config, $messages);
         }
@@ -587,25 +588,26 @@ class Validator implements ValidatorInterface
      * @param Configuration             $config
      * @param string[]                  $messages
      */
-    protected function storeErrors(NestedValidationException $e, Configuration $config, array $messages = [])
+    protected function storeErrors(NestedValidationException $e, Configuration $config, array $messages = array())
     {
-        $errors = [
-            $e->findMessages($this->getRulesNames($config->getValidationRules()))
-        ];
+        // var_dump( $this->getRulesNames( $config->getValidationRules() ), $e->getMessages(['length']) );
+        $errors = array(
+            $e->getMessages($this->getRulesNames($config->getValidationRules())),
+        );
 
         // If default messages are defined
         if (!empty($this->defaultMessages)) {
-            $errors[] = $e->findMessages($this->defaultMessages);
+            $errors[] = $e->getMessages($this->defaultMessages);
         }
 
         // If global messages are defined
         if (!empty($messages)) {
-            $errors[] = $e->findMessages($messages);
+            $errors[] = $e->getMessages($messages);
         }
 
         // If individual messages are defined
         if ($config->hasMessages()) {
-            $errors[] = $e->findMessages($config->getMessages());
+            $errors[] = $e->getMessages($config->getMessages());
         }
 
         $this->setErrors($this->mergeMessages($errors), $config->getKey(), $config->getGroup());
@@ -620,7 +622,7 @@ class Validator implements ValidatorInterface
      *
      * @return self
      */
-    protected function validateInput($input, Configuration $config, array $messages = []): self
+    protected function validateInput($input, Configuration $config, array $messages = array()): self
     {
         try {
             $config->getValidationRules()->assert($input);

@@ -1,13 +1,14 @@
 # Slim Validation
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/bdf52753-f379-41c6-85cf-d1d1379b4aa7/mini.png)](https://insight.sensiolabs.com/projects/bdf52753-f379-41c6-85cf-d1d1379b4aa7)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/awurth/slim-validation/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/awurth/slim-validation/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/gin0115/SlimValidation/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/gin0115/SlimValidation/?branch=master)
 [![Build Status](https://travis-ci.org/awurth/SlimValidation.svg?branch=master)](https://travis-ci.org/awurth/SlimValidation)
-[![Latest Stable Version](https://poser.pugx.org/awurth/slim-validation/v/stable)](https://packagist.org/packages/awurth/slim-validation)
-[![Total Downloads](https://poser.pugx.org/awurth/slim-validation/downloads)](https://packagist.org/packages/awurth/slim-validation)
-[![License](https://poser.pugx.org/awurth/slim-validation/license)](https://packagist.org/packages/awurth/slim-validation)
+[![Latest Unstable Version](https://poser.pugx.org/gin0115/slim-validation/v/unstable)](https://packagist.org/packages/gin0115/slim-validation)
+[![Total Downloads](https://poser.pugx.org/gin0115/slim-validation/downloads)](https://packagist.org/packages/gin0115/slim-validation)
+[![License](https://poser.pugx.org/gin0115/slim-validation/license)](https://packagist.org/packages/gin0115/slim-validation)
 
-A validator for PHP, using [Respect Validation](https://github.com/Respect/Validation) (**Requires PHP 7+**)
+## Forked copy of awurth/SlimValidation with support for Respect/Validation 2.1
+
+A validator for PHP, using [Respect Validation V2.1](https://github.com/Respect/Validation) (**Requires PHP 7+**)
 
 > This project was originally designed to be used with the Micro-Framework "Slim", but can now
   be used with any [psr/http-message](https://github.com/php-fig/http-message)
